@@ -2,8 +2,8 @@
 Tutorial and Example for Advanced Programming 2024 - Faculty of Computer Science, Universitas Indonesia
 
 ---
-
 ## About this Project
+
 In this repository, we have provided you a REST (REpresentational State Transfer) API project using Rocket web framework.
 
 This project consists of four modules:
@@ -48,15 +48,15 @@ You can install Postman via this website: https://www.postman.com/downloads/
     (You might want to use `cargo check` if you only need to verify your work without running the app.)
 
 ## Mandatory Checklists (Publisher)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
+-   [V] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Subscriber model struct.`
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Subscriber repository.`
-    -   [ ] Commit: `Implement list_all function in Subscriber repository.`
-    -   [ ] Commit: `Implement delete function in Subscriber repository.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
+    -   [V] Commit: `Create Subscriber model struct.`
+    -   [V] Commit: `Create Notification model struct.`
+    -   [V] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
+    -   [V] Commit: `Implement add function in Subscriber repository.`
+    -   [V] Commit: `Implement list_all function in Subscriber repository.`
+    -   [V] Commit: `Implement delete function in Subscriber repository.`
+    -   [V] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -77,7 +77,12 @@ This is the place for you to write reflections:
 ### Mandatory (Publisher) Reflections
 
 #### Reflection Publisher-1
-
+1. In the Observer pattern diagram explained by the Head First Design Pattern book, Subscriber is defined as an interface. Explain based on your understanding of Observer design patterns, do we still need an interface (or trait in Rust) in this BambangShop case, or a single Model struct is enough? <br>
+Jika terdapat berbagai jenis subsciber yang memiliki perilakunya masing-masing, maka kita dapat menggunakan trait/interface. Dalam kasus BambangShop, hanya terdapat satu kelas Subscriber sehingga kita tidak memerlukan trait, cukup dengan single model struct saja.
+2. id in Program and url in Subscriber is intended to be unique. Explain based on your understanding, is using Vec (list) sufficient or using DashMap (map/dictionary) like we currently use is necessary for this case? <br>
+Dengan mempertimbangkan ketentuan id program dan url subscriber harus unik, maka sebaiknya menggunakan DashMap. Dengan memanfaatkan key yang unik, maka proses insert, lookup, dan deletion akan berjalan dengan cepat.
+3. When programming using Rust, we are enforced by rigorous compiler constraints to make a thread-safe program. In the case of the List of Subscribers (SUBSCRIBERS) static variable, we used the DashMap external library for thread safe HashMap. Explain based on your understanding of design patterns, do we still need DashMap or we can implement Singleton pattern instead? <br>
+Penerapan Singleton pattern membuat kita dapat memastikan hanya terdapat satu instance pada suatu class. Dalam BambangShop, Singleton pattern sudah diterapkan dengan menggunakan `lazy_static`. Menurut saya, akan lebih baik jika menggunakan DashMap saja untuk menjamin thread safe dan mendukung aplikasi untuk berjalan secara concurrent.
 #### Reflection Publisher-2
 
 #### Reflection Publisher-3
